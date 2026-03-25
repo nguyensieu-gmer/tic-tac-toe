@@ -63,8 +63,8 @@ function GameControler(player1 = "Player1", player2 = "Player2"){
         console.log(`${getActivePlayer().name} choose (${rowPosition}, ${columnPosition}) position`);
         board.markACell(rowPosition, columnPosition, getActivePlayer().marker)
 
-        printNewRound();
         switchActivePlayer();
+        printNewRound();
     }
 
     printNewRound();
@@ -76,6 +76,5 @@ let a = GameControler();
 
 console.log("global test")
 
-console.log(a.getActivePlayer());
-a.switchActivePlayer();
-console.log(a.getActivePlayer());
+a.playRound(1, 1);
+a.playRound(2, 2);
