@@ -51,7 +51,7 @@ function GameControler(player1 = "Player1", player2 = "Player2"){
     const getActivePlayer = () => activePlayer;
 
     const switchActivePlayer = () => {
-        activePlayer = activePlayer.name === "Player1" ? player2 : player1;
+        activePlayer = activePlayer.name === "Player1" ? player[1] : player[0];
     }
 
     const printNewRound = () => {
@@ -71,3 +71,11 @@ function GameControler(player1 = "Player1", player2 = "Player2"){
 
     return { switchActivePlayer, getActivePlayer, playRound };
 }
+
+let a = GameControler();
+
+console.log("global test")
+
+console.log(a.getActivePlayer());
+a.switchActivePlayer();
+console.log(a.getActivePlayer());
