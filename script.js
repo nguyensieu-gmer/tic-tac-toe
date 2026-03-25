@@ -37,3 +37,37 @@ function GameBoard(){
 
     return { getBoard, markACell, printBoard };
 }
+
+function GameControler(player1 = "Player1", player2 = "Player2"){
+    const board = GameBoard();
+
+    const player = [
+        {name: player1, marker: "X"},
+        {name: player2, marker: "O"}
+    ]
+
+    let activePlayer = player[0];
+
+    const getActivePlayer = () => activePlayer;
+
+    const switchActivePlayer = () => {
+        activePlayer = activePlayer.name === "Player1" ? player2 : player1;
+    }
+
+    const printNewRound = () => {
+        console.log(`Now is ${getActivePlayer().name} turn`);
+        board.printBoard();
+    }
+
+    const playRound = (rowPosition, columnPosition) => {
+        console.log(`${getActivePlayer().name} choose (${rowPosition}, ${columnPosition}) position`);
+        board.markACell(rowPosition, columnPosition, getActivePlayer().marker)
+
+        printNewRound();
+        switchActivePlayer();
+    }
+
+    printNewRound();
+
+    return { switchActivePlayer, getActivePlayer, playRound };
+}
