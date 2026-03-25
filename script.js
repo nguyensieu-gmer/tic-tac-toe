@@ -25,9 +25,9 @@ function GameBoard(){
 
     const getBoard = () => board;
 
-    const markACell = (specificRow, specificColumn, mark) => {
-        if (board[specificRow][specificColumn].getValue() !== 0) return;
-        board[specificRow][specificColumn].addMark(mark);
+    const markACell = (row, column, mark) => {
+        if (board[row][column].getValue() !== 0) return;
+        board[row][column].addMark(mark);
     }
 
     const printBoard = () => {
@@ -37,6 +37,74 @@ function GameBoard(){
 
     return { getBoard, markACell, printBoard };
 }
+
+function gameChecker(){
+
+    const checkFull = (board) => {
+        for (let row = 0; row < 3; row++){
+            for (let column = 0; column < 3; column++){
+                if (board[row][column].getValue() === 0){
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+
+    const checkRow = (row, board, marker) => {
+        for (let column = 0; column < 3; column++){
+            if (board[row][column].getValue() !== marker){
+                return false
+            }
+        }
+        return true;
+    }
+
+    const checkColumn = (column, board, marker) => {
+        for (let row = 0; row < 3; row++){
+            if (board[row][column].getValue() !== marker){
+                return false;
+            }
+        }
+        return true  
+    }
+
+    const checkMainDiagon = (row, column, board, marker) => {
+        if (column + row !== 2) return false;
+        for (let i = 0, j = 2; i < 3 && j >= 0; i++, j--){
+            if (board[i][j].getValue() !== marker){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    const checkAxisDiagon = (row, column, board, marker) => {
+        if (row !== column) return false;
+        for (let i = 0; i < 3; i++){
+            if (board[i][i].getValue() !== marker){
+                return false;
+            }   
+        }
+        return true;
+    }
+    
+    const checkWin = (row, column, board, marker) => {
+        if (
+            checkRow(row, board, marker) ||
+            checkColumn(column, board, marker) || 
+            checkMainDiagon(row, column, board, marker) ||
+            checkAxisDiagon(row, column, board, marker)
+        ) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    return { checkWin, checkFull };
+}   
 
 // switch player each round
 // get current turn of player
@@ -54,7 +122,7 @@ function GameControler(player1 = "Player1", player2 = "Player2"){
     const getActivePlayer = () => activePlayer;
 
     const switchActivePlayer = () => {
-        activePlayer = activePlayer.name === "Player1" ? player[1] : player[0];
+        activePlayer = activePlayer === player[0] ? player[1] : player[0];
     }
 
     const printNewRound = () => {
