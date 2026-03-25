@@ -38,6 +38,9 @@ function GameBoard(){
     return { getBoard, markACell, printBoard };
 }
 
+// switch player each round
+// get current turn of player
+// play a round with position in grid
 function GameControler(player1 = "Player1", player2 = "Player2"){
     const board = GameBoard();
 
