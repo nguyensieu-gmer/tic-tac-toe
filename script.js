@@ -71,10 +71,3 @@ function GameControler(player1 = "Player1", player2 = "Player2"){
 
     return { switchActivePlayer, getActivePlayer, playRound };
 }
-
-let a = GameControler();
-
-console.log("global test")
-
-a.playRound(1, 1);
-a.playRound(2, 2);
