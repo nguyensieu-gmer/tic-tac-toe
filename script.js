@@ -111,6 +111,7 @@ function gameChecker(){
 // play a round with position in grid
 function GameControler(player1 = "Player1", player2 = "Player2"){
     const board = GameBoard();
+    const check = gameChecker();
 
     const player = [
         {name: player1, marker: "X"},
@@ -132,10 +133,21 @@ function GameControler(player1 = "Player1", player2 = "Player2"){
 
     const playRound = (rowPosition, columnPosition) => {
         console.log(`${getActivePlayer().name} choose (${rowPosition}, ${columnPosition}) position`);
-        board.markACell(rowPosition, columnPosition, getActivePlayer().marker)
+        board.markACell(rowPosition, columnPosition, getActivePlayer().marker);
+
+        printNewRound();
+
+        if (check.checkWin(rowPosition, columnPosition, board.getBoard(), activePlayer.marker)){
+            console.log(`${activePlayer.name} win`);
+            return;
+        }
+
+        if (check.checkFull(board.getBoard())){
+            console.log("it is a ties");
+            return;
+        }
 
         switchActivePlayer();
-        printNewRound();
     }
 
     printNewRound();
