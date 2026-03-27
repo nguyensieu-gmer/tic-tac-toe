@@ -154,3 +154,8 @@ function GameControler(player1 = "Player1", player2 = "Player2"){
 
     return { switchActivePlayer, getActivePlayer, playRound };
 }
+
+let a = GameControler();
+a.playRound(1, 1)
+a.playRound(1, 2)
+a = GameControler();

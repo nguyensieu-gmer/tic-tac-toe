@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+*:not(dialog) {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+:root {
+  /* Màu nền trang */
+  --color-background: #fafafa;   /* giấy cũ, beige nhẹ */
+  --color-container: #e1e1e1;    /* container nhạt hơn nền để tạo chiều sâu */
+
+  /* Màu chữ */
+  --color-text-main: #000000;    /* nâu sẫm, dễ đọc */
+  --color-text-secondary: #5e5e5e; /* nâu nhạt hơn cho subtitle / caption */
+  --color-text-accent: #dfdfdf;  /* nâu đỏ ấm để nhấn nhá link / highlight */
+
+  /* Màu nút / link / accent */
+  --color-accent: #4a86a4;       /* nâu vàng ấm, tạo điểm nhấn */
+  --color-accent-hover: #99c6dc; /* hover đậm hơn */
+
+  /* Border, divider */
+  --color-border: #304360;       /* nâu nhạt / sepia */
+
+  --body-font: "Montserrat", sans-serif;
+  --second-font: "Dancing Script", cursive;
+  --biggest-font-size: 3rem;
+  --bigger-font-size: 2rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  
+  --font-regular: 400;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+}
