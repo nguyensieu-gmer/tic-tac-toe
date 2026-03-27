@@ -10,21 +10,19 @@
 <body>
     <div class="container">
         <div class="marks">
-            <div>X</div>
-            <div>O</div>
+            <div class="x">X</div>
+            <div class="o">O</div>
         </div>
         <div class="board">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <button class="cell"></button><button class="cell"></button><button class="cell"></button><button class="cell"></button><button class="cell"></button><button class="cell"></button><button class="cell"></button><button class="cell"></button><button class="cell"></button>
         </div>
-        <button class="reset">reset game</button>
+        <dialog>
+            <div class="diacontent">
+                <div class="result">It's a tie</div>
+                <button id="diareset" class="btn">reset</button>
+            </div>
+        </dialog>
+        <button id="reset" class="btn">reset game</button>
     </div>
 </body>
 </html>

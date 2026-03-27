@@ -38,8 +38,7 @@ function GameBoard(){
     return { getBoard, markACell, printBoard };
 }
 
-function gameChecker(){
-
+function GameChecker(){
     const checkFull = (board) => {
         for (let row = 0; row < 3; row++){
             for (let column = 0; column < 3; column++){
@@ -111,7 +110,9 @@ function gameChecker(){
 // play a round with position in grid
 function GameControler(player1 = "Player1", player2 = "Player2"){
     const board = GameBoard();
-    const check = gameChecker();
+    const check = GameChecker();
+    let winner;
+    let draw = false;
 
     const player = [
         {name: player1, marker: "X"},
@@ -139,23 +140,110 @@ function GameControler(player1 = "Player1", player2 = "Player2"){
 
         if (check.checkWin(rowPosition, columnPosition, board.getBoard(), activePlayer.marker)){
             console.log(`${activePlayer.name} win`);
+            winner = activePlayer;
             return;
         }
 
         if (check.checkFull(board.getBoard())){
             console.log("it is a ties");
+            draw = true;
             return;
         }
 
         switchActivePlayer();
     }
 
+    const getWinner = () => winner;
+    const getDraw = () => !winner && draw ? true : false;
+
     printNewRound();
 
-    return { switchActivePlayer, getActivePlayer, playRound };
+    return {
+        switchActivePlayer, 
+        getActivePlayer, 
+        playRound, 
+        getControlBoard: () => board, 
+        getWinner, 
+        getDraw 
+    }
 }
 
-let a = GameControler();
-a.playRound(1, 1)
-a.playRound(1, 2)
-a = GameControler();
+function ScreenControler(){
+    let game = GameControler();
+
+    let activePlayer = () => game.getActivePlayer();
+    const dialog = document.querySelector("dialog");
+    const result = document.querySelector(".result");
+    const reset = document.getElementById("reset");
+    const diareset = document.getElementById("diareset");
+
+    const x = document.querySelector(".x");
+    const o = document.querySelector(".o");
+    const board = document.querySelector(".board");
+
+    function playerMarkTurner(){
+        if (activePlayer().marker === "X"){
+            x.classList.add("hover");
+            o.classList.remove("hover");
+        }
+        else{
+            o.classList.add("hover");
+            x.classList.remove("hover");
+        }
+    }
+
+    updatescreen();
+    playerMarkTurner();
+
+    function updatescreen(){
+        board.innerHTML = "";
+        const gameBoard = game.getControlBoard().getBoard(); //object
+        gameBoard.forEach((row, i) => {
+            row.forEach((column, j) => {
+                let button = document.createElement("button");
+                button.classList.add("cell");
+                button.dataset.row = i + '';
+                button.dataset.column = j + '';
+                button.textContent = gameBoard[i][j].getValue() !== 0 ? gameBoard[i][j].getValue() : "";
+                board.appendChild(button);
+            })
+        })
+    }
+
+    function cellsListener(e){
+        if (!e.target.classList.contains("cell")) return;
+        let row = Number(e.target.dataset.row);
+        let column = Number(e.target.dataset.column);
+
+        game.playRound(row, column);
+
+        playerMarkTurner();
+        updatescreen();
+
+        if (game.getWinner()){
+            dialog.showModal();
+            result.textContent = `Winner is ${game.getWinner().name} with ${game.getWinner().marker} maker`;
+            return;
+        }
+        if (game.getDraw()){
+            dialog.showModal();
+            result.textContent = "It is a Tie";
+            return;
+        }
+    }
+
+    board.addEventListener("click", cellsListener);
+    reset.addEventListener("click", resetGame);
+    diareset.addEventListener("click", resetGame);
+
+
+    function resetGame(){
+        game = GameControler();
+        updatescreen();
+        playerMarkTurner();
+        dialog.close();
+        return
+    }
+}
+
+ScreenControler();

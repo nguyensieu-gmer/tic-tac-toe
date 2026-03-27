@@ -22,7 +22,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   font-family: var(--body-font);
-  background-color: var(--color-text-accent);
+  background-color: var(--color-background);
 }
 
 img, picture, video, canvas, svg {
@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5, h6 {
 
 :root {
   /* Màu nền trang */
-  --color-background: #eee6d8;   /* giấy cũ, beige nhẹ */
+  --color-background: #dedede;   /* giấy cũ, beige nhẹ */
   --color-container: #e1e1e1;    /* container nhạt hơn nền để tạo chiều sâu */
 
   /* Màu chữ */
@@ -117,13 +117,9 @@ h1, h2, h3, h4, h5, h6 {
     gap: 0.4rem;
 }
 
-/* craft */
-.board div{
-    background-color: white;
-}
-
-.reset{
+.btn{
     border: none;
+    outline: none;
     background-color: var(--color-accent);
     color: white;
     font-size: var(--h1-font-size);
@@ -134,7 +130,50 @@ h1, h2, h3, h4, h5, h6 {
     transition: 0.3s ease;
 }
 
-.reset:hover{
+.btn:hover{
     background-color: var(--color-accent-hover);
     color: white;
+}
+
+.marks .x.hover{
+    background-color: var(--color-accent-hover);
+    color: white;
+}
+
+.marks .o.hover{
+    background-color: var(--color-accent-hover);
+    color: white;
+}
+
+.board .cell{
+    appearance: none;
+    border: none;
+    background-color: white;
+    font-size: var(--biggest-font-size);
+    font-weight: var(--font-semi-bold);
+}
+
+dialog .diacontent{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    height: 20rem;
+    width: 20rem;
+    padding: 1rem;
+    font-size: var(--h1-font-size);
+    font-weight: var(--font-semi-bold);
+}
+
+dialog{
+    width: fit-content;
+    height: fit-content;
+    box-shadow: 0 0 10px 3px rgb(175, 175, 175);
+    border: none;
+    border-radius: 10px;
+}
+
+dialog::backdrop{
+    background-color: hsla(0, 0%, 0%, 0.555);
 }
