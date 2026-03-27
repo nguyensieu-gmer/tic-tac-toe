@@ -21,6 +21,8 @@
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  font-family: var(--body-font);
+  background-color: var(--color-text-accent);
 }
 
 img, picture, video, canvas, svg {
@@ -49,13 +51,13 @@ h1, h2, h3, h4, h5, h6 {
 
 :root {
   /* Màu nền trang */
-  --color-background: #fafafa;   /* giấy cũ, beige nhẹ */
+  --color-background: #eee6d8;   /* giấy cũ, beige nhẹ */
   --color-container: #e1e1e1;    /* container nhạt hơn nền để tạo chiều sâu */
 
   /* Màu chữ */
   --color-text-main: #000000;    /* nâu sẫm, dễ đọc */
   --color-text-secondary: #5e5e5e; /* nâu nhạt hơn cho subtitle / caption */
-  --color-text-accent: #dfdfdf;  /* nâu đỏ ấm để nhấn nhá link / highlight */
+  --color-text-accent: #eeeeee;  /* nâu đỏ ấm để nhấn nhá link / highlight */
 
   /* Màu nút / link / accent */
   --color-accent: #4a86a4;       /* nâu vàng ấm, tạo điểm nhấn */
@@ -77,4 +79,62 @@ h1, h2, h3, h4, h5, h6 {
   --font-regular: 400;
   --font-semi-bold: 600;
   --font-bold: 700;
+}
+
+.container{
+    width: 50rem;
+    height: 30rem;
+    margin: 4rem auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    padding: 1rem 0;
+    justify-content: space-between;
+}
+
+.marks{
+    display: flex;
+    gap: 1rem;
+}
+
+.marks div{
+    padding: 0.4rem 8rem;
+    border: 2px solid black;
+    border-radius: 4px;
+    font-weight: var(--font-bold);
+    font-size: var(--h1-font-size);
+}
+
+.board{
+    display: grid;
+    width: 15rem;
+    height: 15rem;
+    background-color: black;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0.4rem;
+}
+
+/* craft */
+.board div{
+    background-color: white;
+}
+
+.reset{
+    border: none;
+    background-color: var(--color-accent);
+    color: white;
+    font-size: var(--h1-font-size);
+    font-weight: var(--font-semi-bold);
+    border-radius: 10px;
+    padding: 1rem 3rem;
+    box-shadow: 0px 0px 10px 3px rgb(179, 179, 179);
+    transition: 0.3s ease;
+}
+
+.reset:hover{
+    background-color: var(--color-accent-hover);
+    color: white;
 }
