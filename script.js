@@ -212,6 +212,7 @@ function ScreenControler(){
 
     function cellsListener(e){
         if (!e.target.classList.contains("cell")) return;
+        if (e.target.textContent !== "") return;
         let row = Number(e.target.dataset.row);
         let column = Number(e.target.dataset.column);
 
